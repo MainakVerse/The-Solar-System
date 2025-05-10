@@ -46,22 +46,22 @@ gulp.task('sass', function () {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(src.css))
     .on('error', handleError)
-    .on('end', sassCompileCallback)
-  ;
+    .on('end', sassCompileCallback);
 });
 
 gulp.task('watch', function () {
-  return gulp.watch(src.sass + '/**/*.scss', ['sass'])
+  return gulp.watch(src.sass + '/**/*.scss', gulp.series('sass'))
     .on('change', watcherCallback)
-    .on('error', handleError)
-  ;
+    .on('error', handleError);
 });
 
 gulp.task('umd', function () {
-  gulp.src([src.js + 'vendor/THREEOrbitControls/index.js'])
+  return gulp.src([src.js + 'vendor/THREEOrbitControls/index.js'])
     .pipe(wrapUMD({
       namespace: 'THREE.OrbitControls'
     }))
-    .pipe(gulp.dest(src.js + 'vendor/THREEOrbitControls/umd'))
-  ;
+    .pipe(gulp.dest(src.js + 'vendor/THREEOrbitControls/umd'));
 });
+
+// ✅ This is what Netlify needs
+gulp.task('build', gulp.series('sass', 'umd'));
