@@ -64,4 +64,4 @@ gulp.task('umd', function () {
 });
 
 // ✅ This is what Netlify needs
-gulp.task('build', gulp.series('sass', 'umd', 'html'));
+gulp.task('build', gulp.series('sass', 'umd'));
