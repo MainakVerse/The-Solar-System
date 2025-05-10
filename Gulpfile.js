@@ -4,7 +4,7 @@
  * Dependencies
  */
 var gulp = require('gulp');
-var sass = require('gulp-sass');
+const sass = require('gulp-dart-sass');
 var wrapUMD = require('gulp-wrap-umd');
 var sourcemaps = require('gulp-sourcemaps');
 
